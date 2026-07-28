@@ -18,3 +18,6 @@ if not groq_api_key:
 
 llm=ChatGroq(model="Gemma-9b-It",groq_api_key=groq_api_key)
 
+#Initializing the tools
+wikipedia_wrapper=WikipediaAPIWrapper()
+
