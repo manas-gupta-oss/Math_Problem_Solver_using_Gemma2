@@ -34,4 +34,8 @@ calculator=Tool(
     description="Useful for when you need to answer questions about math. Input should be a fully formed question."
 )
 
+prompt='''You are a math problem solver. You will be given a text description of a math problem, and you need to convert it into a mathematical expression or equation that can be solved. Your task is to identify the relevant information from the text and formulate it into a clear and concise mathematical representation. Please provide the final answer as well as the steps taken to arrive at that answer. If the problem cannot be solved, please explain why.''''
 
+prompt_template=PromptTemplate()
+prompt_template.input_variables=["question"]
+prompt_template.template=prompt
