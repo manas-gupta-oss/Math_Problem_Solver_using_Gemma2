@@ -43,3 +43,12 @@ prompt_template=PromptTemplate(
 
 #combining the tools into chain
 chain=LLMChain(llm=llm,prompt=prompt_template)
+
+reasoning_tool=Tool(
+    name="Reasoning Tool",
+    func=chain.run,
+    description="Useful for when you need to reason through a problem and come up with a solution. Input should be a fully formed question."
+)
+
+#initialize the agent with the tools
+tools=[wikipedia_tool,calculator,reasoning_tool]
