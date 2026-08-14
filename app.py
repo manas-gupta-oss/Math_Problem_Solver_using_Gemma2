@@ -26,3 +26,12 @@ wikipedia_tool=Tool(
     description="Useful for when you need to answer questions about current events or general knowledge. Input should be a fully formed question."
 )
 
+#Initialize the math tool
+math_chain=LLMMathChain.from_llm(llm=llm,verbose=True)
+calculator=Tool(
+    name="Calculator",
+    func=math_chain.run,
+    description="Useful for when you need to answer questions about math. Input should be a fully formed question."
+)
+
+
