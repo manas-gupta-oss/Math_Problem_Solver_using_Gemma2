@@ -20,4 +20,9 @@ llm=ChatGroq(model="Gemma-9b-It",groq_api_key=groq_api_key)
 
 #Initializing the tools
 wikipedia_wrapper=WikipediaAPIWrapper()
+wikipedia_tool=Tool(
+    name="Wikipedia",
+    func=wikipedia_wrapper.run,
+    description="Useful for when you need to answer questions about current events or general knowledge. Input should be a fully formed question."
+)
 
