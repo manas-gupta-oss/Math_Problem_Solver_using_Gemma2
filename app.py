@@ -68,5 +68,10 @@ for message in st.session_state.messages:
 
 #function to generate the response 
 def generate_response(question):
-   response=agent.invoke({'input':question})
+   response=assistant_agent.invoke({'input':question})
+
+#Starting the chat interface
+question=st.text_Area("Enter your math problem here:",key="input")
+
+if st.
 
