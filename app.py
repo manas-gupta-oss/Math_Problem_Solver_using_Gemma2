@@ -73,5 +73,21 @@ def generate_response(question):
 #Starting the chat interface
 question=st.text_Area("Enter your math problem here:",key="input")
 
-if st.
+if st.button("find my answer"):
+    if question:
+        with st.spinner("Finding the answer..."):
+            st.session_state.messages.append({"role": "user", "content": question})
+            st.chat_message("user").write(question)
+
+            st_cb=StreamlitCallbackHandler(st.container(),expand_new_thoughts=False)
+            response=assistant_agent.invoke({'input':question},callbacks=[st_cb])
+
+            st.session_state.messages.append({"role": "assistant", "content": response['output']})
+            st.write('###Response')
+
+            st.success(response['output'])
+
+    else:
+        st.warning("Please enter a math problem to solve.")
+
 
