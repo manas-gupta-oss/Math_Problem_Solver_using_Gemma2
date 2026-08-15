@@ -34,7 +34,7 @@ calculator=Tool(
     description="Useful for when you need to answer questions about math. Input should be a fully formed question."
 )
 
-prompt='''You are a math problem solver. You will be given a text description of a math problem, and you need to convert it into a mathematical expression or equation that can be solved. Your task is to identify the relevant information from the text and formulate it into a clear and concise mathematical representation. Please provide the final answer as well as the steps taken to arrive at that answer. If the problem cannot be solved, please explain why.''''
+prompt='''You are a math problem solver. You will be given a text description of a math problem, and you need to convert it into a mathematical expression or equation that can be solved. Your task is to identify the relevant information from the text and formulate it into a clear and concise mathematical representation. Please provide the final answer as well as the steps taken to arrive at that answer. If the problem cannot be solved, please explain why.'''
 
 prompt_template=PromptTemplate(
    input_variables=["question"]
@@ -51,4 +51,22 @@ reasoning_tool=Tool(
 )
 
 #initialize the agent with the tools
-tools=[wikipedia_tool,calculator,reasoning_tool]
+assistant_agent=initialize_agent(
+tools=[wikipedia_tool,calculator,reasoning_tool],
+llm=llm,
+agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
+verbose=False,
+handle_parsing_errors=True)
+
+if "messages" not in st.session_state:
+    st.session_state["messages"] = [
+        {"role": "assistant", "content": "You are a helpful assistant."}
+    ]
+
+for message in st.session_state.messages:
+    st.chat_message(message["role"]).write(message["content"])
+
+#function to generate the response 
+def generate_response(question):
+   response=agent.invoke({'input':question})
+
